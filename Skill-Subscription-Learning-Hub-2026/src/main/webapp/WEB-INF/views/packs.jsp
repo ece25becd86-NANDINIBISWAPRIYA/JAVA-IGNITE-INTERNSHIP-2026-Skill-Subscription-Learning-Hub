@@ -1,68 +1,52 @@
-<!--
-	Why it is used:
+package com.skills.hub.controller;
 
-This page shows available training packs / courses / subscription plans.
+import com.skills.hub.service.SubscriptionService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-What it does:
-Displays list of courses or packages
-Shows price, duration, features
-Lets user choose a plan
-Why it is needed:
+/*
+=========================================================
+WHAT IS THIS FILE?
+Handles subscription between user and skill pack
+=========================================================
+*/
 
-This is the main business page of your system:
+@Controller
+public class SubscriptionController {
 
-It converts users into customers
-Helps users decide what to buy/enroll
-Simple flow:
+    private final SubscriptionService subscriptionService;
 
-User - logs in -views packs - selects a plan
--->
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    public SubscriptionController(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+    }
 
-<html>
-<head>
-    <title>Skill Packs</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    @GetMapping("/subscribe")
+    public String subscribe(@RequestParam Long userId,
+                            @RequestParam Long packId) {
 
-<body>
+        // =========================
+        // TASK
+        // =========================
+        // STEP 1: call subscriptionService.subscribe(userId, packId)
+        // STEP 2: redirect to subscriptions page
 
-<div class="header">
-    <img src="/images/logo.png">
-    <h2>Available Skill Packs</h2>
-</div>
+        return null;
+    }
 
-<div class="container">
+    @GetMapping("/subscriptions/{userId}")
+    public String viewSubscriptions(@PathVariable Long userId) {
 
-    <h3>All Courses</h3>
+        // =========================
+        // TASK
+        // =========================
+        // STEP 1: list = subscriptionService.getUserSubscriptions(userId)
+        // STEP 2: model.addAttribute("subs", list)
+        // STEP 3: return subscriptions.jsp
 
-    <!--  loop skill packs -->
-    <c:forEach var="pack" items="${packs}">
+        return null;
+    }
 
-        <div class="card">
-
-            <!--  show title -->
-            <h4>${pack.title}</h4>
-
-            <!--  show description -->
-            <p>${pack.description}</p>
-
-            <!--  show price -->
-            <b>₹ ${pack.price}</b>
-
-            <br><br>
-
-            <!-- subscribe action -->
-            <a href="/subscribe?userId=1&packId=${pack.id}">
-                Subscribe
-            </a>
-
-        </div>
-
-    </c:forEach>
-
-</div>
-
-</body>
-</html>
+	public SubscriptionService getSubscriptionService() {
+		return subscriptionService;
+	}
+}
