@@ -1,10 +1,3 @@
-package com.skills.hub.repository;
-
-import com.skills.hub.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-/*
-=========================================================
 WHAT IS THIS FILE?
 =========================================================
 
@@ -29,4 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Custom query method
     // Used for login validation
     User findByEmail(String email);
+}
+    User findByName(String name);
 }
