@@ -16,6 +16,12 @@ Handles skill pack (course) operations
 @Controller
 public class SkillPackController {
 
+    private final SkillPackService packService;
+
+    public SkillPackController(SkillPackService packService) {
+        this.packService = packService;
+    }
+
     @GetMapping("/packs")
     public String viewPacks(Model model) {
 
@@ -25,14 +31,10 @@ public class SkillPackController {
         // STEP 1: list = packService.getAllPacks()
         // STEP 2: model.addAttribute("packs", list)
         // STEP 3: return packs.jsp
-        
-        var list = packService.getAllPacks();
-
-        
-        model.addAttribute("packs", list);
 
         return null;
-        
+        model.addAttribute("packs", packService.getAllPacks());
+
         return "packs";
     }
 
@@ -42,7 +44,6 @@ public class SkillPackController {
         // STEP 1: return add-pack page
 
         return null;
-        
         return "add-pack";
     }
 
@@ -54,11 +55,9 @@ public class SkillPackController {
         // =========================
         // STEP 1: call packService.addSkillPack(pack)
         // STEP 2: redirect /packs
-        
         packService.addSkillPack(pack);
 
         return null;
-       
         return "redirect:/packs";
     }
 
@@ -67,18 +66,15 @@ public class SkillPackController {
 
         // STEP 1: call packService.deleteSkillPack(id)
         // STEP 2: redirect /packs
-        
         packService.deleteSkillPack(id);
 
         return null;
-        
         return "redirect:/packs";
     }
 
 	public SkillPackService getPackService() {
 		return packService;
 	}
-}
     public SkillPackService getPackService() {
         return packService;
     }
