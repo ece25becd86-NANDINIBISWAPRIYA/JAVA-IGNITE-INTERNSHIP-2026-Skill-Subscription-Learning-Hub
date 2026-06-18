@@ -1,62 +1,61 @@
 <!--
 	Why it is used:
 
-	This is where a new user is created in the system.
+	This page handles the final step: enrolling or purchasing a pack.
 
 	What it does:
-	Collects user details (name, email, password, etc.)
-	Sends data to backend
-	Stores user in database
+	Shows selected plan details
+	Takes confirmation (and maybe payment info)
+	Subscribes user to a course/package
+	Stores subscription in DB
 	Why it is needed:
 
-	Without registration:
+	This is the core transaction page:
 
-	No new users can join your system
-	Login would be useless
+	Links user + course/package
+	Activates access after selection
 	Simple flow:
 
-	User - fills form -submits -data saved in DB - account created
+	User selects pack- comes here - confirms -subscription saved
 -->
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
 <body>
 
-<div class="header">
-    <img src="/images/logo.png">
-    <h2>Skill Subscription Hub</h2>
-</div>
+<h2>My Subscriptions</h2>
 
-<div class="container">
+<h3>
+    Total Subscriptions: ${count}
+</h3>
 
-    <h3>Register</h3>
 
-	<c:if test="${not empty error}">
-	    <p style="color:red;">
-	        ${error}
-	    </p>
-	</c:if>
-    <form action="/register" method="post">
+<table border="1">
 
-        <!--  enter name -->
-        <input type="text" name="name" placeholder="Name">
+<tr>
+    <th>Status</th>
+</tr>
 
-        <!--  enter email -->
-        <input type="text" name="email" placeholder="Email">
 
-        <!--  enter password -->
-        <input type="password" name="password" placeholder="Password">
+<c:forEach var="s" items="${subs}">
 
-        <button type="submit">Register</button>
+<tr>
 
-    </form>
+    <td>${s.skillPack.title}</td>
 
-</div>
+    <td>${s.startDate}</td>
+
+    <td>${s.endDate}</td>
+
+    <td>${s.status}</td>
+
+</tr>
+
+</c:forEach>
+
+
+</table>
+
 
 </body>
 </html>
