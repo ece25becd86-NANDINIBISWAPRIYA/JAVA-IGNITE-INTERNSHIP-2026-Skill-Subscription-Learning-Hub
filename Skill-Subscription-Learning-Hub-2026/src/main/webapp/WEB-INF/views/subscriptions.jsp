@@ -25,27 +25,38 @@
 
 <h2>My Subscriptions</h2>
 
+<h3>
+    Total Subscriptions: ${count}
+</h3>
+
+
 <table border="1">
 
 <tr>
-    <th>Skill Pack</th>
-    <th>Start Date</th>
-    <th>End Date</th>
     <th>Status</th>
 </tr>
+
 
 <c:forEach var="s" items="${subs}">
 
 <tr>
+
     <td>${s.skillPack.title}</td>
+
     <td>${s.startDate}</td>
+
     <td>${s.endDate}</td>
+
     <td>${s.status}</td>
+
 </tr>
 
 </c:forEach>
 
+
 </table>
 
+
 </body>
+</html>
 </html>
